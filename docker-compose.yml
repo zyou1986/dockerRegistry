@@ -1,0 +1,18 @@
+registry:
+    image: 'docker.io/registry:2'
+    volumes:
+      - '/var/lib/registry/:/var/lib/registry/'
+      - '/etc/docker/registry/config.yml:/etc/docker/registry/config.yml'
+    ports:
+      - '7000:7000'
+    restart: always
+    container_name: registry
+humpback:
+    image: 'humpbacks/humpback-web:1.0.0'
+    net: "host"
+    restart: always
+    volumes:
+      - '/opt/app/humpback-web/dbFiles:/humpback-web/dbFiles'
+    environment:
+      HUMPBACK_LISTEN_PORT: 8000
+    container_name: humpback-web 
